@@ -43,6 +43,6 @@ cmake -S "../" \
 cmake --build "./$BUILD_NAME" --config $BUILD_TYPE
 
 # deploy qt dependencies (shared libs and plugins)
-"$QT_DIR"/bin/windeployqt.exe --qmldir ../source/app ../bin/$BUILD_NAME
+"$QT_DIR"/bin/windeployqt.exe --qmldir ../sources/app ../bin/$BUILD_NAME
 
 echo "Build completed."
