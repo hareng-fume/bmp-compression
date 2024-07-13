@@ -32,11 +32,9 @@ int main(int argc, char *argv[])
     parser.process(app);
 
 #ifdef DEBUG_BUILD
-
     if (parser.isSet("test")) {
         _Test::_run_tests();
     }
-
 #endif
 
     const auto dirVal = parser.value("dir");
