@@ -24,8 +24,10 @@ int main(int argc, char *argv[])
          QCoreApplication::translate("main", "Read *.bmp, *.png, *.barch files from <directory>."),
          QCoreApplication::translate("main", "directory"),
          QDir::currentPath()});
+#ifdef DEBUG_BUILD
     parser.addOption(
         {{"t", "test"}, QCoreApplication::translate("main", "Launch unit-tests, Debug only.")});
+#endif
     parser.process(app);
 
 #ifdef DEBUG_BUILD
