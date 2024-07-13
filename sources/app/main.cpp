@@ -5,9 +5,6 @@
 
 #ifdef DEBUG_BUILD
 #include "test.h"
-#include <barch.h>
-#include <bmp.h>
-#include <image.h>
 #endif
 
 #include <QCommandLineParser>

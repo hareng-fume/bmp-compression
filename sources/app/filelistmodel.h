@@ -8,6 +8,7 @@
 #include <QList>
 #include <QModelIndex>
 #include <QPointer>
+#include <QSet>
 #include <QVariant>
 
 class FileListModel : public QAbstractListModel
