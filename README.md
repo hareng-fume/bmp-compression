@@ -1,7 +1,5 @@
 # Grayscale Image Compression App
 
-## Description
-
 ## Table of Contents
 1. [Installation](#installation)
 2. [Launch](#launch)
