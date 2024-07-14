@@ -15,7 +15,7 @@
 
 2. Navigate to the project directory
 ```
-   cd pocketbook-bmp
+	cd pocketbook-bmp
 ```
 
 3. Launch <b>build.sh</b> with arguments in shell script Cygwin, Git Bash terminals
