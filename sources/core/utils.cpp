@@ -1,12 +1,5 @@
 #include "utils.h"
 
-#ifdef _MSC_VER
-#include <windows.h>
-#else
-#include <codecvt>
-#include <locale>
-#endif
-
 namespace utils {
 
 //-----------------------------------------------------------------------------
@@ -79,36 +72,6 @@ std::pair<EColor, std::uint32_t> _get_pixels_data(unsigned char *ip_data)
     if (word != 0xffffffff)
         color = word == 0 ? EColor::Black : EColor::Grey;
     return {color, word};
-}
-
-//-----------------------------------------------------------------------------
-// Convert the wide-character path to a UTF-8 encoded string
-std::string _wstring_to_utf8(const std::wstring &i_wstr)
-{
-#ifdef _MSC_VER
-    int utf8_length
-        = WideCharToMultiByte(CP_UTF8, 0, i_wstr.c_str(), -1, nullptr, 0, nullptr, nullptr);
-    if (utf8_length == 0)
-        return {};
-
-    std::vector<char> utf8_buffer(utf8_length);
-    int result = WideCharToMultiByte(CP_UTF8,
-                                     0,
-                                     i_wstr.c_str(),
-                                     -1,
-                                     utf8_buffer.data(),
-                                     utf8_length,
-                                     nullptr,
-                                     nullptr);
-    if (result == 0)
-        return {};
-
-    return std::string(utf8_buffer.begin(), utf8_buffer.end() - 1);
-#else
-
-    std::wstring_convert<std::codecvt_utf8<wchar_t> > converter;
-    return converter.to_bytes(i_wstr);
-#endif
 }
 
 } // namespace utils

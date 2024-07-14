@@ -42,7 +42,7 @@ int FileListModel::rowCount(const QModelIndex &i_parent /*= QModelIndex()*/) con
 }
 
 //-----------------------------------------------------------------------------
-QVariant FileListModel::data(const QModelIndex &i_index, int i_role /*= Qt::DisplayRole*/) const
+QVariant FileListModel::data(const QModelIndex &i_index, int i_role /*= NameRole*/) const
 {
     if (!i_index.isValid() || i_index.row() >= m_items.size())
         return QVariant();
@@ -104,6 +104,12 @@ QHash<int, QByteArray> FileListModel::roleNames() const
 }
 
 //-----------------------------------------------------------------------------
+bool FileListModel::canHandleItem(const QModelIndex &i_index) const
+{
+    return data(i_index, FileListModel::IsSupportedRole).toBool();
+}
+
+//-----------------------------------------------------------------------------
 void FileListModel::addItem(const QFileInfo &i_fileInfo)
 {
     const size_t fileHash = std::hash<std::wstring>{}(i_fileInfo.absoluteFilePath().toStdWString());
@@ -124,6 +130,7 @@ void FileListModel::processItem(const QModelIndex &i_index)
         return;
 
     setData(i_index, true, IsProcessingRole);
+
 #ifdef DEBUG_BUILD
     qDebug() << "is_processing[" << i_index.row() << "]: true";
 #endif
@@ -164,7 +171,9 @@ QPointer<FileListModel> FileListModel::Create(const QDir &i_dir)
 //-----------------------------------------------------------------------------
 void FileListModel::handleWorkerFinished(int i_index, QString i_result)
 {
-    addItem(QFileInfo{i_result});
+    if (!i_result.isEmpty())
+        addItem(QFileInfo{i_result});
+
     setData(createIndex(i_index, 0), false, IsProcessingRole);
 #ifdef DEBUG_BUILD
     qDebug() << "is_processing[" << i_index << "]: false";

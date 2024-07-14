@@ -10,13 +10,13 @@ Worker::Worker(QObject *ip_parent /*= nullptr*/)
 //-----------------------------------------------------------------------------
 void Worker::process(int i_index, QString i_filePath)
 {
-    const std::string filePath = i_filePath.toUtf8().constData();
+    const std::filesystem::path filePath(i_filePath.toStdWString());
 
-    std::wstring resultingPath;
-    if (is_bmp({filePath}))
-        resultingPath = encode(i_filePath.toStdWString());
-    else if (is_barch({filePath}))
-        resultingPath = decode(i_filePath.toStdWString());
+    std::filesystem::path resultingPath;
+    if (is_bmp(filePath))
+        resultingPath = encode(filePath);
+    else if (is_barch(filePath))
+        resultingPath = decode(filePath);
 
-    emit finished(i_index, QString::fromStdWString(resultingPath));
+    emit finished(i_index, QString::fromStdWString(resultingPath.wstring()));
 }

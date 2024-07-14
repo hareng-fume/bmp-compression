@@ -95,10 +95,9 @@ std::vector<bool> &operator<<(std::vector<bool> &o_vec, const std::bitset<N> &i_
 namespace bmp {
 
 //-----------------------------------------------------------------------------
-bool read(const std::wstring &i_file_path, RawImageData &o_data)
+bool read(const std::filesystem::path &i_file_path, RawImageData &o_data)
 {
-    const auto file_path = utils::_wstring_to_utf8(i_file_path);
-    std::ifstream ifs(file_path, std::ios::binary);
+    std::ifstream ifs(i_file_path, std::ios::binary);
     if (!ifs)
         return false;
 

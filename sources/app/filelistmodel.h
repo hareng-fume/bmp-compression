@@ -33,6 +33,7 @@ public:
                          int i_role = NameRole) override;
     virtual QHash<int, QByteArray> roleNames() const override;
 
+    bool canHandleItem(const QModelIndex &i_index) const;
     void addItem(const QFileInfo &i_fileInfo);
     void processItem(const QModelIndex &i_index);
 

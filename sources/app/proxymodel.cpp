@@ -40,7 +40,7 @@ bool ProxyModel::canHandleItem(int i_index) const
     const auto sourceIndex = mapToSource(proxyIndex);
 
     auto *p_sourceModel = qobject_cast<FileListModel *>(sourceModel());
-    return p_sourceModel->data(sourceIndex, FileListModel::IsSupportedRole).toBool();
+    return p_sourceModel->canHandleItem(sourceIndex);
 }
 
 //-----------------------------------------------------------------------------

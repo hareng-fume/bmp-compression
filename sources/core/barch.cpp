@@ -37,10 +37,9 @@ struct BarchHeader
 namespace barch {
 
 //-----------------------------------------------------------------------------
-bool read(const std::wstring &i_file_path, CompressedImageData &o_data)
+bool read(const std::filesystem::path &i_file_path, CompressedImageData &o_data)
 {
-    const auto file_path = utils::_wstring_to_utf8(i_file_path);
-    std::ifstream ifs(file_path, std::ios::binary);
+    std::ifstream ifs(i_file_path, std::ios::binary);
     if (!ifs)
         return false;
 
@@ -66,10 +65,9 @@ bool read(const std::wstring &i_file_path, CompressedImageData &o_data)
 }
 
 //-----------------------------------------------------------------------------
-bool write(const std::wstring &i_file_path, const CompressedImageData &i_data)
+bool write(const std::filesystem::path &i_file_path, const CompressedImageData &i_data)
 {
-    const auto file_path = utils::_wstring_to_utf8(i_file_path);
-    std::ofstream ofs(file_path, std::ios::binary);
+    std::ofstream ofs(i_file_path, std::ios::binary);
     if (!ofs)
         return false;
 
