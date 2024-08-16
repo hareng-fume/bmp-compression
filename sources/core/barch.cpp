@@ -8,8 +8,8 @@
 namespace {
 
 //-----------------------------------------------------------------------------
-inline constexpr bool _0 = false;
-inline constexpr std::uint16_t _BA = 0x4142;
+static constexpr bool _0 = false;
+static constexpr std::uint16_t _BA = 0x4142;
 
 /* PoketBook suggested compression image format with some extensions:
         - format identifier      / std::uint16_t - BA (save these two letters in binary at the very beginning of saving compressed data)
